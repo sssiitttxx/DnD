@@ -17,6 +17,7 @@ export function loadState() {
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved ? JSON.parse(saved) : initialState;
   } catch (e) {
+    console.error('Ошибка при чтении из localStorage: ', e)
     return initialState;
   }
 }

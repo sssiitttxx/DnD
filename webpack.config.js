@@ -5,11 +5,21 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: './src/js/index.js',
   output: {
-  path: path.resolve(__dirname, 'dist'),
-  filename: 'bundle.js',
-  clean: true,
-  publicPath: '/trello/',
-},
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    clean: true,
+    // publicPath: '/trello/', <--- ЛОКАЛЬНО КОММЕНТИРУЕМ, ВЕРНЕМ ПЕРЕД ДЕПЛОЕМ
+  },
+  
+  // ✅ ОДИН БЛОК DEVSERVER ДЛЯ ВСЕГО
+  devServer: {
+    static: './dist',
+    port: 3000,
+    open: true,
+    hot: true,
+    historyApiFallback: true, 
+  },
+
   module: {
     rules: [
       { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' },
@@ -21,5 +31,4 @@ module.exports = {
     new HtmlWebpackPlugin({ template: './src/index.html' }),
     new MiniCssExtractPlugin(),
   ],
-  devServer: { open: true, hot: true },
 };
