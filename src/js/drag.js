@@ -3,7 +3,7 @@ import { renderBoard } from './render.js';
 
 export function setupDragAndDrop(board, app) {
   board.addEventListener('dragstart', (e) => {
-    const card = e.closest('.card');
+    const card = e.target.closest('.card');
    if (!card) return;
     e.dataTransfer.setData('text/plain', card.dataset.id);
 
@@ -48,4 +48,20 @@ export function setupDragAndDrop(board, app) {
         saveState(app.state);
         renderBoard(board, app.state, app.activeFormColumn);
     });
+
+    function getDragAfterElement(container, y) {
+  const elements = [...container.querySelectorAll('.card:not(.dragging)')];
+  
+  return elements.reduce((closest, child) => {
+    
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    
+    if (offset < 0 && offset > closest.offset) {
+      return { offset: offset, element: child };  
+    }
+    return closest; 
+    
+  }, { offset: Number.NEGATIVE_INFINITY }).element;  
+}
 }

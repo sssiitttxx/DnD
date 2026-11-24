@@ -3,12 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/js/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
-    clean: true,
-  },
+  path: path.resolve(__dirname, 'dist'),
+  filename: 'bundle.js',
+  clean: true,
+  publicPath: '/trello/',
+},
   module: {
     rules: [
       { test: /\.js$/, exclude: /node_modules/, use: 'babel-loader' },

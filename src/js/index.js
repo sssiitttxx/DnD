@@ -1,9 +1,9 @@
-import './style.css';
+import '../style.css';
 
-import { loadState } from './store';
-import { renderBoard } from './render';
-import { setupEvents } from './events';
-import { setupDragAndDrop } from './drag';
+import { loadState } from './store.js';
+import { renderBoard } from './render.js';
+import { setupEvents } from './events.js';
+import { setupDragAndDrop } from './drag.js';
 
 const board = document.getElementById('board');
 
@@ -12,7 +12,7 @@ const app = {
   activeFormColumn: null
 };
 
-renderBoard(board, app.state, activeFormColumn);
+renderBoard(board, app.state, app.activeFormColumn);
 
 setupEvents(board, app);
 setupDragAndDrop(board, app);
